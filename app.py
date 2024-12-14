@@ -5,16 +5,10 @@ import datetime
 from flask_cors import CORS
 from functools import wraps
 
-
 app = Flask(__name__)
 CORS(app)
 
-
-# Secret key for JWT encoding and decoding
-SECRET_KEY = "your_secret_key"
-
-# Hardcoded user credentials
-USER_CREDENTIALS = {"username": "123456789", "password": "password"}
+SECRET_KEY = "our_secret_key"
 
 users = [
     {
@@ -44,7 +38,6 @@ def token_required(f):
             return jsonify({"message": "Token is missing"}), 401
 
         try:
-            # Decode the JWT
             print(token)
             token = token.replace("Bearer ", "")
             token_data = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
