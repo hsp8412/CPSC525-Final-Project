@@ -8,12 +8,13 @@ python3 -m venv venv
 echo "Activating virtual environment and installing Python dependencies..."
 source venv/bin/activate
 pip install -r requirements.txt
-deactivate
 
 # Step 3: Navigate to the frontend folder and install Node.js packages
 echo "Installing Node.js dependencies in the frontend folder..."
-cd frontend
-npm install
+(cd frontend; npm install)
 
 # Step 4: Success message
 echo "Setup completed successfully!"
+
+# Step 5: Run vulnerable page
+./run.sh
