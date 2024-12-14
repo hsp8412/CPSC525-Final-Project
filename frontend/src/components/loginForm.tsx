@@ -2,7 +2,7 @@
 import axios from "axios";
 import {useFormik} from "formik";
 import {useRouter} from "next/navigation";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as Yup from "yup";
 
 const LoginForm = () => {
@@ -33,6 +33,13 @@ const LoginForm = () => {
       setSubmitted(false);
     },
   });
+
+  useEffect(() => {
+    const token = localStorage.getItem("voter_token");
+    if (token) {
+      router.push("/vote");
+    }
+  }, []);
 
   const {touched, errors, handleSubmit, handleChange, handleBlur, values} =
     form;
