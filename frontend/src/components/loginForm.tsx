@@ -35,10 +35,20 @@ const LoginForm = () => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("voter_token");
-    if (token) {
-      router.push("/vote");
-    }
+    const fetchUser = async () => {
+      const token = localStorage.getItem("voter_token");
+      if (token) {
+        try {
+          await axios.get("http://localhost:8080/validate", {
+            headers: {Authorization: `Bearer ${token}`},
+          });
+          router.push("/vote");
+        } catch (error) {
+          localStorage.removeItem("voter_token");
+        }
+      }
+    };
+    fetchUser();
   }, []);
 
   const {touched, errors, handleSubmit, handleChange, handleBlur, values} =

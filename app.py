@@ -89,7 +89,7 @@ def submit_vote(user_id):
 
     try:
         # Deserialize the payload
-        vote_data = pickle.loads(data)  # Vulnerable to malicious payloads
+        vote_data = pickle.loads(data)
     except Exception as e:
         print("Deserialization error:", e)
         return "Invalid payload", 400
